@@ -21,8 +21,8 @@ import { useDispatch } from "react-redux";
 const pages = ["SHOWTIME", "THEATER", "NEWS"];
 const newPages = [
   { keyId: "showtimes", name: "SHOWTIME", path: "/homepage#showtimes" },
-  { keyId: "theaters", name: "THEATER", path:"/homepage#theaters" },
-  { keyId: "news", name: "NEWS",path:"/homepage#news"  },
+  { keyId: "theaters", name: "THEATER", path: "/homepage#theaters" },
+  { keyId: "news", name: "NEWS", path: "/homepage#news" },
 ];
 const settings = [];
 
@@ -56,11 +56,14 @@ const Header = () => {
   }
 
   function stringAvatar(name) {
+    console.log(name.split(" ")[1]);
     return {
       sx: {
         bgcolor: stringToColor(name),
       },
-      children: name.split[0] ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}` : "UN",
+      children: name.split(" ")[1]
+        ? `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`
+        : `${name.split(" ")[0][0].toUpperCase()}`,
     };
   }
 
