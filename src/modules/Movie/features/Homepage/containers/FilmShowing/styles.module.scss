@@ -1,0 +1,104 @@
+.image {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.wrapper {
+  position: relative;
+  transition: all 0.5s;
+  margin: 0px 10px;
+  transition: all 0.5s;
+  &:hover {
+    .imgInfo .imgOverlay {
+      display: flex;
+      opacity: 1;
+    }
+  }
+  .imgInfo {
+    position: relative;
+    margin: 8px 0px;
+    width: 100%;
+    height: 300px;
+    .imgOverlay {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      background-color: rgba($color: #000000, $alpha: 0.4);
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+      transition: all 0.5s;
+      opacity: 0;
+    }
+    .showing {
+      position: absolute;
+      top: 0;
+      left: 0;
+      margin-top: 20px;
+      padding: 8px;
+      background: linear-gradient(90deg, #11998e 0%, #38ef7d 100%);
+      color: white;
+      border-radius: 0 5px 5px 0;
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+.movieInfo {
+  position: relative;
+  .movieName {
+    margin: 0 10px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    transition: all 0.5s;
+  }
+  .rateScore {
+    transition: all 0.5s;
+  }
+  .btnWrapper {
+    opacity: 0;
+    position: absolute;
+    top: 20%;
+    left: 0;
+    right: 0;
+    transition: all 0.5s;
+    .buyBtn {
+      background-color: #fee140;
+      background-image: linear-gradient(90deg, #fee140 0%, #fa709a 100%);
+    }
+  }
+
+  &:hover {
+    .btnWrapper {
+      display: block;
+      opacity: 1;
+    }
+    .movieName {
+      opacity: 0;
+    }
+    .rateScore {
+      opacity: 0;
+    }
+  }
+}
+
+.headerText {
+  font-size: 50px;
+  font-weight: 600;
+  background-color: #4158d0;
+  background: -webkit-linear-gradient(
+    43deg,
+    #4158d0 0%,
+    #c850c0 33%,
+    #ffcc70 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 40px 0;
+}
