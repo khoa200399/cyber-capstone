@@ -5,6 +5,7 @@ import { setBannerList, setMovieList } from './slice';
 const BASE_URL = process.env.REACT_APP_BASE_URL_API;
 const TOKEN_CYBERSOFT = process.env.REACT_APP_TOKEN_CYBERSOFT;
 const token = JSON.parse(localStorage.getItem('access_token'));
+console.log(token);
 
 export const movieApi = createApi({
     reducerPath: 'movieApi',
@@ -89,6 +90,9 @@ export const movieApi = createApi({
             query: (username) => ({
                 url: `QuanLyNguoiDung/LayThongTinNguoiDung`,
                 method: "POST",
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
                 params: {
                     taiKhoan: username
                 }

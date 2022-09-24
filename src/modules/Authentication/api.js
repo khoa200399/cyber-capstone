@@ -29,6 +29,7 @@ export const authApi = createApi({
                 try {
                     const res = await queryFulfilled;
                     const { accessToken, ...userInfo } = res.data.content
+                    console.log(res.data.content);
                     localStorage.setItem('access_token', JSON.stringify(accessToken))
                     localStorage.setItem('user_info', JSON.stringify(userInfo))
                 } catch (err) {
