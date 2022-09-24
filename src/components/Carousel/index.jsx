@@ -25,6 +25,7 @@ const Carousel = (props) => {
     rows: rows,
     autoplay: autoplay,
     autoplaySpeed: autoplaySpeed,
+    arrows: false,
   };
   return (
     <Slider {...settings} style={{ marginTop: "72px" }}>

@@ -22,6 +22,7 @@ const Carousel = (props) => {
     swipe: true,
     autoplay: true,
     autoplaySpeed: 2000,
+    arrows:false
   };
   return isLoading ? (
     <Loader />
