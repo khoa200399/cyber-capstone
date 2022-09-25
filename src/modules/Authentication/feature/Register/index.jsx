@@ -4,6 +4,28 @@ import s from "./styles.module.scss";
 import { useFormik } from "formik";
 import { useRegisterMutation } from "modules/Authentication/api";
 import Spinner from "components/Spinner";
+import * as yup from "yup";
+
+const validateSchema = yup.object().shape({
+  taiKhoan_dk: yup.string().required("*Required!"),
+  matKhau_dk: yup
+    .string()
+    .required("*Required!")
+    .min(6, "*At least 6 charaters!")
+    .max(30, "*At maximum 30 charaters!"),
+  email_dk: yup.string().required("*Required!").email("*Invalid Email!"),
+  soDt_dk: yup
+    .string()
+    .matches(/(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/, "*Invalid Phone number!"),
+  maNhom_dk: yup.string(),
+  hoTen_dk: yup
+    .string()
+    .required("*Required!")
+    .matches(
+      /^[a-zA-ZÀÁÂÃÈÉÊÌÍÒÓÔÕÙÚĂĐĨŨƠàáâãèéêìíòóôõùúăđĩũơƯĂẠẢẤẦẨẪẬẮẰẲẴẶẸẺẼỀỀỂẾưăạảấầẩẫậắằẳẵặẹẻẽềềểếỄỆỈỊỌỎỐỒỔỖỘỚỜỞỠỢỤỦỨỪễệỉịọỏốồổỗộớờởỡợụủứừỬỮỰỲỴÝỶỸửữựỳỵỷỹ\s\W|_]+$/,
+      "*Invalid Name!"
+    ),
+});
 
 const Register = (props) => {
   const showSignUp = props.showSignUp;
@@ -25,6 +47,7 @@ const Register = (props) => {
       maNhom_dk: "",
       hoTen_dk: "",
     },
+    validationSchema: validateSchema,
     onSubmit: (values) => {
       register({
         taiKhoan: values.taiKhoan_dk,
@@ -56,13 +79,15 @@ const Register = (props) => {
       {!showSignUp ? null : (
         <Card className={`${s.cardSignin} !overflow-auto`}>
           <div>
-            <h1 className="font-bold text-center mt-8 pb-4 text-[30px] text-black">Sign up</h1>
+            <h1 className="font-bold text-center mt-8 pb-4 text-[30px] text-black">
+              Sign up
+            </h1>
           </div>
           {error ? (
-              <h1 className="text-center py-4 text-[red] text-[12px]">
-                <i>{error.data.content}</i>
-              </h1>
-            ) : null}
+            <h1 className="text-center py-4 text-[red] text-[12px]">
+              <i>{error.data.content}</i>
+            </h1>
+          ) : null}
           <form onSubmit={formik.handleSubmit}>
             <div className="flex justify-center flex-wrap items-center">
               <TextField
@@ -72,6 +97,14 @@ const Register = (props) => {
                   width: "50%",
                   textAlign: "center",
                 }}
+                error={
+                  formik.errors.taiKhoan_dk && formik.touched.taiKhoan_dk ? true : false
+                }
+                helperText={
+                  formik.errors.taiKhoan_dk && formik.touched.taiKhoan_dk
+                    ? formik.errors.taiKhoan_dk
+                    : null
+                }
                 id="taiKhoan_dk"
                 name="taiKhoan_dk"
                 label="User name"
@@ -85,6 +118,14 @@ const Register = (props) => {
                   width: "50%",
                   textAlign: "center",
                 }}
+                error={
+                  formik.errors.matKhau_dk && formik.touched.matKhau_dk ? true : false
+                }
+                helperText={
+                  formik.errors.matKhau_dk && formik.touched.matKhau_dk
+                    ? formik.errors.matKhau_dk
+                    : null
+                }
                 id="matKhau_dk"
                 name="matKhau_dk"
                 label="Password"
@@ -98,6 +139,12 @@ const Register = (props) => {
                   width: "50%",
                   textAlign: "center",
                 }}
+                error={formik.errors.email_dk && formik.touched.email_dk ? true : false}
+                helperText={
+                  formik.errors.email_dk && formik.touched.email_dk
+                    ? formik.errors.email_dk
+                    : null
+                }
                 id="email_dk"
                 name="email_dk"
                 label="Email"
@@ -111,6 +158,12 @@ const Register = (props) => {
                   width: "50%",
                   textAlign: "center",
                 }}
+                error={formik.errors.soDt_dk && formik.touched.soDt_dk ? true : false}
+                helperText={
+                  formik.errors.soDt_dk && formik.touched.soDt_dk
+                    ? formik.errors.soDt_dk
+                    : null
+                }
                 id="soDt_dk"
                 name="soDt_dk"
                 label="Phone number"
@@ -124,6 +177,12 @@ const Register = (props) => {
                   width: "50%",
                   textAlign: "center",
                 }}
+                error={formik.errors.maNhom_dk && formik.touched.maNhom_dk ? true : false}
+                helperText={
+                  formik.errors.maNhom_dk && formik.touched.maNhom_dk
+                    ? formik.errors.maNhom_dk
+                    : null
+                }
                 id="maNhom_dk"
                 name="maNhom_dk"
                 label="Group Code"
@@ -137,6 +196,12 @@ const Register = (props) => {
                   width: "50%",
                   textAlign: "center",
                 }}
+                error={formik.errors.hoTen_dk && formik.touched.hoTen_dk ? true : false}
+                helperText={
+                  formik.errors.hoTen_dk && formik.touched.hoTen_dk
+                    ? formik.errors.hoTen_dk
+                    : null
+                }
                 id="hoTen_dk"
                 name="hoTen_dk"
                 label="Fullname"

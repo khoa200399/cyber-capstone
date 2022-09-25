@@ -9,6 +9,16 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Loader from "components/Loader";
 import Spinner from "components/Spinner";
+import * as yup from "yup";
+
+const validateSchema = yup.object().shape({
+  taiKhoan_dn: yup.string().required("*Required!"),
+  matKhau_dn: yup
+    .string()
+    .required("*Required!")
+    .min(3, "*At least 3 charaters!")
+    .max(30, "*At maximum 30 charaters!"),
+});
 
 const Login = (props) => {
   const showSignUp = props.showSignUp;
@@ -25,6 +35,7 @@ const Login = (props) => {
       taiKhoan_dn: "",
       matKhau_dn: "",
     },
+    validationSchema: validateSchema,
     onSubmit: (values) => {
       login({ taiKhoan: values.taiKhoan_dn, matKhau: values.matKhau_dn });
     },
@@ -64,6 +75,14 @@ const Login = (props) => {
               className="flex justify-center flex-col items-center"
             >
               <TextField
+                error={
+                  formik.errors.taiKhoan_dn && formik.touched.taiKhoan_dn ? true : false
+                }
+                helperText={
+                  formik.errors.taiKhoan_dn && formik.touched.taiKhoan_dn
+                    ? formik.errors.taiKhoan_dn
+                    : null
+                }
                 sx={{
                   display: "block",
                   margin: "8px 0",
@@ -75,6 +94,14 @@ const Login = (props) => {
                 value={formik.values.taiKhoan_dn}
               />
               <TextField
+                error={
+                  formik.errors.matKhau_dn && formik.touched.matKhau_dn ? true : false
+                }
+                helperText={
+                  formik.errors.matKhau_dn && formik.touched.matKhau_dn
+                    ? formik.errors.matKhau_dn
+                    : null
+                }
                 sx={{
                   display: "block",
                   margin: "8px 0",
