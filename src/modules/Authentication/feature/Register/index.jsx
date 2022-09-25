@@ -129,6 +129,7 @@ const Register = (props) => {
                 id="matKhau_dk"
                 name="matKhau_dk"
                 label="Password"
+                type="password"
                 onChange={formik.handleChange}
                 value={formik.values.matKhau_dk}
               />
